@@ -3,6 +3,7 @@ export const colors = {
   green: "#38CC8B",
   violet: "#5E54A4",
   dark: "#3D3B48",
+  white: "#ffffff",
 };
 
 /* 
@@ -15,12 +16,14 @@ export const breakpoints = {
   mobile: "375px",
 };
 
-export const exportDefaultSize = "1.6rem";
+export const defaultFontSize = "1.6rem";
+export const hugeFontSize = "2.8rem";
 
 const variables = {
   colors,
   breakpoints,
-  exportDefaultSize,
+  defaultFontSize,
+  hugeFontSize,
 };
 
 export default variables;
