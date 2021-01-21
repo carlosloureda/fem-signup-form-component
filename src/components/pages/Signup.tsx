@@ -1,7 +1,11 @@
+import React, { SyntheticEvent } from "react";
+
 import styled from "@emotion/styled";
 import { colors, breakpoints, hugeFontSize } from "../../theme/variables";
 import bgDesktop from "../../images/bg-intro-desktop.png";
 import bgMobile from "../../images/bg-intro-mobile.png";
+
+import { Link } from "react-router-dom";
 
 const S: any = {};
 S.Section = styled.section`
@@ -9,6 +13,7 @@ S.Section = styled.section`
   height: 100vh;
   background-image: url(${bgDesktop}),
     linear-gradient(to right, ${colors.red}, ${colors.red});
+  background-size: cover;
 
   /* Also we can to it this another way */
   /* background-image: url(${bgDesktop});
@@ -24,7 +29,14 @@ S.Section = styled.section`
       linear-gradient(to right, ${colors.red}, ${colors.red});
   }
 
+  /* TODO: fix this little ñapa! */
+  @media (max-width: 525px) {
+    height: 100%;
+  }
+
   padding: 0 2.4rem;
+  padding-bottom: 7.2rem;
+  color: #fff;
 `;
 
 S.HomeTitle = styled.div`
@@ -46,7 +58,7 @@ S.TrialBanner = styled.div`
   border-radius: 0.9rem;
   text-align: center;
   margin-bottom: 2.4rem;
-  box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0.8rem 0 rgba(0, 0, 0, 0.15);
   font-size: 1.5rem;
 
   .highlighted {
@@ -54,7 +66,74 @@ S.TrialBanner = styled.div`
   }
 `;
 
+S.Form = styled.form`
+  background-color: #fff;
+  border-radius: 1.1rem;
+  padding: 2.4rem;
+  /* margin-bottom: 7.2rem; */
+  text-align: center;
+  box-shadow: 0 0.8rem 0 rgba(0, 0, 0, 0.15);
+
+  .input {
+    font-size: 1.4rem;
+    color: ${colors.dark};
+    font-family: inherit;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    font-weight: 600;
+    border: 0.1rem solid #dedede;
+    border-radius: 0.5rem;
+    margin-bottom: 1.6rem;
+
+    &:focus {
+      outline: none;
+      border: 0.25rem solid ${colors.green};
+
+      &:invalid {
+        border: 0.25rem solid ${colors.red};
+      }
+    }
+  }
+  .btn {
+    text-transform: uppercase;
+    padding: 1.5rem 4rem;
+    display: block;
+    border-radius: 0.5rem;
+    background-color: ${colors.green};
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+
+    box-shadow: inset 0 -0.4rem 0 rgba(0, 0, 0, 0.15);
+    margin-bottom: 1.1rem;
+  }
+
+  .terms {
+    font-size: 1.1rem;
+    line-height: 2.1rem;
+    font-weight: 500;
+    color: #bab7d4;
+    padding: 0 7%;
+
+    .link {
+      color: ${colors.red};
+      text-decoration: none;
+      font-weight: 700;
+    }
+  }
+`;
+
 const SignupPage = () => {
+  const onSubmit = (e: SyntheticEvent): void => {
+    e.preventDefault();
+    // TODO: make everything work with React
+    console.log("Submit the content after validating");
+  };
   return (
     <S.Section>
       <S.HomeTitle>
@@ -70,15 +149,45 @@ const SignupPage = () => {
           <span className="highlighted">Try it free 7 days</span> then $20/mo.
           thereafter
         </S.TrialBanner>
-        <form action="">
-          <input type="text" />
-        </form>
+        <S.Form onSubmit={onSubmit}>
+          <input
+            className="input"
+            type="text"
+            placeholder="First Name"
+            required
+          />
+          <input
+            className="input"
+            type="text"
+            placeholder="Last Name"
+            required
+          />
+          <input
+            className="input"
+            type="email"
+            placeholder="Email Address"
+            required
+          />
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" className="btn">
+            claim your free trial
+          </button>
+          {/* TODO: for RPG compliance you need to checkbox this! */}
+          <p className="terms">
+            By clicking the button, you are agreeing to our{" "}
+            <Link className="link" to="/terms">
+              Terms and Services
+            </Link>
+          </p>
+        </S.Form>
       </div>
     </S.Section>
   );
 };
 
 export default SignupPage;
-
-// - Mobile: 375px
-// - Desktop: 1440px

@@ -3,6 +3,9 @@ import { Global, css } from "@emotion/react";
 import { defaultFontSize } from "./theme/variables";
 
 import Signup from "./components/pages/Signup";
+import Terms from "./components/pages/Terms";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const GlobalStyles = css`
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -14,7 +17,7 @@ const GlobalStyles = css`
     box-sizing: inherit;
     font-family: "Poppins", sans-serif;
     line-height: 26px;
-    color: #fff;
+    /* color: #fff; */
   }
   body {
     box-sizing: border-box;
@@ -28,10 +31,21 @@ const GlobalStyles = css`
 
 function App() {
   return (
-    <>
+    <Router>
       <Global styles={GlobalStyles} />
-      <Signup />
-    </>
+
+      <Switch>
+        <Route exact path="/">
+          <Signup />
+        </Route>
+        <Route path="/terms">
+          <Terms />
+        </Route>
+        {/* <Route path="*">
+          <h1>Page Not Found!</h1>
+        </Route> */}
+      </Switch>
+    </Router>
   );
 }
 
