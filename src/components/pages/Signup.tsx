@@ -39,6 +39,21 @@ S.HomeTitle = styled.div`
   }
 `;
 
+S.TrialBanner = styled.div`
+  background-color: ${colors.violet};
+  display: block;
+  padding: 1.8rem 6.6rem;
+  border-radius: 0.9rem;
+  text-align: center;
+  margin-bottom: 2.4rem;
+  box-shadow: 0 0.7rem 1rem rgba(0, 0, 0, 0.6);
+  font-size: 1.5rem;
+
+  .highlighted {
+    font-weight: 700;
+  }
+`;
+
 const SignupPage = () => {
   return (
     <S.Section>
@@ -51,7 +66,10 @@ const SignupPage = () => {
         </p>
       </S.HomeTitle>
       <div>
-        <h3>Try it free 7 days then $20/mo. thereafter</h3>
+        <S.TrialBanner>
+          <span className="highlighted">Try it free 7 days</span> then $20/mo.
+          thereafter
+        </S.TrialBanner>
         <form action="">
           <input type="text" />
         </form>
