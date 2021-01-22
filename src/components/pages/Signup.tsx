@@ -234,7 +234,7 @@ export const ERROR_STATUS = "error";
  * Attribution to Sayantini: https://www.edureka.co/blog/javascript-email-validation/
  */
 const validateEmail = (email: String): Boolean => {
-  const mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const mailformat = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   return email.match(mailformat) ? true : false;
 };
 
@@ -361,6 +361,7 @@ const SignupPage = () => {
               name="email"
               value={formData.email}
               onChange={onChange}
+              autoComplete="userName"
             />
             <label htmlFor="email" className="form__label-error">
               {formErrors?.email}
@@ -376,6 +377,7 @@ const SignupPage = () => {
               name="password"
               value={formData.password}
               onChange={onChange}
+              autoComplete="current-password"
             />
             <label htmlFor="password" className="form__label-error">
               {formErrors?.password}
