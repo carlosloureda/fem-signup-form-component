@@ -6,10 +6,9 @@
 
 TODOS:
 
-- Do the validation
-  -- Form width on desktop is screwed!!!
-
+-- Form width on desktop is screwed!!!
 -- Add some animations
--- Manage form state with React
+-- clicked button state, animations and staff
 
-- Review mobile version
+- Better validation and useEffect adn so
+- Add tests?
