@@ -226,12 +226,6 @@ export const LOADING_STATUS = "loading";
 export const SUCCESS_STATUS = "success";
 export const ERROR_STATUS = "error";
 
-// enum Statuses {
-//   IDLE_STATUS = "idle",
-//   LOADING_STATUS = "loading",
-//   SUCCESS_STATUS = "success",
-//   ERROR_STATUS = "error",
-// }
 /**
  * Validates an email
  * @param email {string} - The email to be validated
@@ -260,14 +254,6 @@ const SignupPage = () => {
 
   const [status, setStatus] = React.useState<String>(IDLE_STATUS);
 
-  // const onChange = (e: SyntheticEvent): void => {
-  //   const target = e.target as HTMLInputElement;
-  //   setFormData({
-  //     ...formData,
-  //     [target.name]: target.value,
-  //   });
-  // };
-
   const onChange = (e: SyntheticEvent & { target: HTMLInputElement }): void => {
     const target = e.target;
     setFormData({
@@ -276,12 +262,50 @@ const SignupPage = () => {
     });
   };
 
-  // TODO: on submitting
+  const validateForm = React.useCallback(() => {
+    const _errors: FormErrors = {};
+    const { firstName, lastName, email, password } = formData;
+    if (!firstName) {
+      _errors.firstName = `First Name cannot be empty`;
+    }
+    if (!lastName) {
+      _errors.lastName = `Last Name cannot be empty`;
+    }
+    if (!email) {
+      _errors.email = `Email cannot be empty`;
+    } else if (!validateEmail(email)) {
+      _errors.email = `Looks like this is not an email`;
+    }
+    if (!password) {
+      _errors.password = `Password cannot be empty`;
+    }
+    console.log("On Validate form: ", _errors);
+
+    setFormErrors(_errors);
+  }, [formData]);
+
+  const formHasAnyError = React.useCallback((errors?: any): Boolean => {
+    if (!errors) {
+      errors = formErrors;
+    }
+
+    return errors.firstName ||
+      errors.lastName ||
+      errors.email ||
+      errors.password
+      ? true
+      : false;
+  }, []);
+
+  React.useEffect(() => {
+    if (formHasAnyError()) {
+      validateForm();
+    }
+  }, [validateForm, formHasAnyError]);
+
   const onSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
     setStatus(LOADING_STATUS);
-    // TODO: make everything work with React
-    console.log("Submit the content after validating - ", formData);
 
     const _errors: FormErrors = {};
     const { firstName, lastName, email, password } = formData;
@@ -301,16 +325,9 @@ const SignupPage = () => {
     }
 
     setFormErrors(_errors);
-    console.log("errors: ", formErrors);
 
-    if (
-      !_errors.firstName &&
-      !_errors.lastName &&
-      !_errors.email &&
-      !_errors.password
-    ) {
+    if (!formHasAnyError(_errors)) {
       setStatus(SUCCESS_STATUS);
-      console.log("EIEIE!");
     } else {
       setStatus(IDLE_STATUS);
     }
