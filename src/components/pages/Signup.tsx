@@ -124,11 +124,8 @@ S.Form = styled.form`
         border: 0.25rem solid ${colors.red};
       }
     }
-
-    &.error {
-      border: 0.25rem solid ${colors.red};
-    }
   }
+
   .form__input-required {
     position: absolute;
     background-color: ${colors.red};
@@ -139,11 +136,31 @@ S.Form = styled.form`
     border-radius: 50%;
     display: none;
   }
+
+  .form__group.error {
+    > .form__input-required {
+      display: inline;
+    }
+    > .input {
+      border: 0.25rem solid ${colors.red};
+      color: ${colors.red};
+      &::placeholder,
+      &::-webkit-input-placeholder,
+      &::-ms-input-placeholder {
+        color: transparent;
+      }
+    }
+    > .form__label-error {
+      display: block;
+    }
+  }
+
   .form__group {
     /* TODO: see how to improve this once the errors are there! */
     margin-bottom: 1.6rem;
     position: relative;
   }
+
   .form__label-error {
     color: ${colors.red};
     display: block;
@@ -154,9 +171,9 @@ S.Form = styled.form`
     font-weight: 500;
     margin-top: 0.6rem;
     display: none;
-    &.error {
+    /* &.error {
       display: block;
-    }
+    } */
   }
   .btn {
     text-transform: uppercase;
