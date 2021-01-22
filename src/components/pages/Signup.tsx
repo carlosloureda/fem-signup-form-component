@@ -226,12 +226,6 @@ export const LOADING_STATUS = "loading";
 export const SUCCESS_STATUS = "success";
 export const ERROR_STATUS = "error";
 
-// enum Statuses {
-//   IDLE_STATUS = "idle",
-//   LOADING_STATUS = "loading",
-//   SUCCESS_STATUS = "success",
-//   ERROR_STATUS = "error",
-// }
 /**
  * Validates an email
  * @param email {string} - The email to be validated
@@ -260,14 +254,6 @@ const SignupPage = () => {
 
   const [status, setStatus] = React.useState<String>(IDLE_STATUS);
 
-  // const onChange = (e: SyntheticEvent): void => {
-  //   const target = e.target as HTMLInputElement;
-  //   setFormData({
-  //     ...formData,
-  //     [target.name]: target.value,
-  //   });
-  // };
-
   const onChange = (e: SyntheticEvent & { target: HTMLInputElement }): void => {
     const target = e.target;
     setFormData({
@@ -276,12 +262,9 @@ const SignupPage = () => {
     });
   };
 
-  // TODO: on submitting
   const onSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
     setStatus(LOADING_STATUS);
-    // TODO: make everything work with React
-    console.log("Submit the content after validating - ", formData);
 
     const _errors: FormErrors = {};
     const { firstName, lastName, email, password } = formData;
@@ -301,7 +284,6 @@ const SignupPage = () => {
     }
 
     setFormErrors(_errors);
-    console.log("errors: ", formErrors);
 
     if (
       !_errors.firstName &&
@@ -310,7 +292,6 @@ const SignupPage = () => {
       !_errors.password
     ) {
       setStatus(SUCCESS_STATUS);
-      console.log("EIEIE!");
     } else {
       setStatus(IDLE_STATUS);
     }
