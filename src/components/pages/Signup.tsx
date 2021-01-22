@@ -29,9 +29,13 @@ S.Section = styled.section`
   font-size, we cannot ever overrite (it won't work). Check this awesome post on stackoverflow:
   https://stackoverflow.com/questions/47409585/using-rem-units-in-media-queries-and-as-width#answer-51993054
   */
-  @media (max-width: ${breakpoints.mobile}) {
+  @media (max-width: ${breakpoints.mobileSmall}) {
     background-image: url(${bgMobile}),
       linear-gradient(to right, ${colors.red}, ${colors.red});
+    display: block;
+  }
+
+  @media (max-width: ${breakpoints.mobileBig}) {
     display: block;
   }
 
@@ -50,30 +54,33 @@ S.HomeTitle = styled.div`
   text-align: center;
   padding-top: 8.8rem;
   margin-bottom: 6.4rem;
-  max-width: 52.5rem;
 
-  @media (min-width: ${breakpoints.mobile}) {
+  @media (min-width: ${breakpoints.mobileBig}) {
+    max-width: 52.5rem;
     text-align: initial;
   }
 
   .heading {
-    font-size: ${hugeFontSize};
-    line-height: 3.6rem;
-    padding-bottom: 1.6rem;
+    padding-bottom: 4.5rem;
+    font-size: 5rem;
+    line-height: 5.5rem;
 
-    /* TODO: do breakpoints for tablet and desktop */
-    @media (min-width: ${breakpoints.mobile}) {
-      font-size: 5rem;
-      line-height: 5.5rem;
+    @media (min-width: ${breakpoints.mobileSmall}) and (max-width: ${breakpoints.tablet}) {
+      font-size: 4rem;
+      padding-bottom: 1.6rem;
+    }
+
+    @media (max-width: ${breakpoints.mobileSmall}) {
+      font-size: ${hugeFontSize};
+      line-height: 3.6rem;
+      padding-bottom: 1.6rem;
     }
   }
 `;
 
 S.FormContainer = styled.div`
-  max-width: 54rem;
-  @media (min-width: ${breakpoints.mobile}) {
-    /* width: 50%;
-    float: left; */
+  @media (min-width: ${breakpoints.mobileBig}) {
+    max-width: 54rem;
   }
 `;
 
@@ -96,7 +103,6 @@ S.Form = styled.form`
   background-color: #fff;
   border-radius: 1.1rem;
   padding: 2.4rem;
-  /* margin-bottom: 7.2rem; */
   text-align: center;
   box-shadow: 0 0.8rem 0 rgba(0, 0, 0, 0.15);
 
@@ -122,7 +128,7 @@ S.Form = styled.form`
   }
   .btn {
     text-transform: uppercase;
-    padding: 1.5rem 4rem;
+    padding: 1.5rem 3rem;
     display: block;
     border-radius: 0.5rem;
     background-color: ${colors.green};

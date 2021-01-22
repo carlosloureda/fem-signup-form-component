@@ -13,7 +13,9 @@ export const colors = {
 */
 export const breakpoints = {
   desktop: "1444px",
-  mobile: "375px",
+  mobileSmall: "375px",
+  mobileBig: "700px",
+  tablet: "964px",
 };
 
 export const defaultFontSize = "1.6rem";
