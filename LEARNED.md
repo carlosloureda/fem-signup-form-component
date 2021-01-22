@@ -3,3 +3,12 @@
 - Began to use Vercel CLI
 - We've learned about `:invalid` pseudo-class
 - We've learned about media-queries and rem.
+
+TODOS:
+
+- Do the desktop version
+- Do the validation
+- Review mobile version
+
+-- Add some animations
+-- Manage form state with React

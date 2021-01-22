@@ -19,6 +19,11 @@ S.Section = styled.section`
   /* background-image: url(${bgDesktop});
   background-color: ${colors.red}; */
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5rem;
+
   /* 
   If we used rems on mediaqueries they are always realted to the default browser
   font-size, we cannot ever overrite (it won't work). Check this awesome post on stackoverflow:
@@ -27,6 +32,7 @@ S.Section = styled.section`
   @media (max-width: ${breakpoints.mobile}) {
     background-image: url(${bgMobile}),
       linear-gradient(to right, ${colors.red}, ${colors.red});
+    display: block;
   }
 
   /* TODO: fix this little ñapa! */
@@ -37,17 +43,37 @@ S.Section = styled.section`
   padding: 0 2.4rem;
   padding-bottom: 7.2rem;
   color: #fff;
+  /* margin: 0 auto; */
 `;
 
 S.HomeTitle = styled.div`
   text-align: center;
   padding-top: 8.8rem;
   margin-bottom: 6.4rem;
+  max-width: 52.5rem;
+
+  @media (min-width: ${breakpoints.mobile}) {
+    text-align: initial;
+  }
 
   .heading {
     font-size: ${hugeFontSize};
     line-height: 3.6rem;
     padding-bottom: 1.6rem;
+
+    /* TODO: do breakpoints for tablet and desktop */
+    @media (min-width: ${breakpoints.mobile}) {
+      font-size: 5rem;
+      line-height: 5.5rem;
+    }
+  }
+`;
+
+S.FormContainer = styled.div`
+  max-width: 54rem;
+  @media (min-width: ${breakpoints.mobile}) {
+    /* width: 50%;
+    float: left; */
   }
 `;
 
@@ -144,7 +170,7 @@ const SignupPage = () => {
           invaluable.
         </p>
       </S.HomeTitle>
-      <div>
+      <S.FormContainer>
         <S.TrialBanner>
           <span className="highlighted">Try it free 7 days</span> then $20/mo.
           thereafter
@@ -185,7 +211,7 @@ const SignupPage = () => {
             </Link>
           </p>
         </S.Form>
-      </div>
+      </S.FormContainer>
     </S.Section>
   );
 };
