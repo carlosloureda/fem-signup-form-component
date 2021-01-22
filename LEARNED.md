@@ -7,6 +7,7 @@
 TODOS:
 
 - Do the validation
+  -- Form width on desktop is screwed!!!
 
 -- Add some animations
 -- Manage form state with React

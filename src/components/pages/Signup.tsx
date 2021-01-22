@@ -207,14 +207,115 @@ S.Form = styled.form`
       font-weight: 700;
     }
   }
+
+  .successHeading {
+    color: ${colors.green};
+    padding: 2rem 0;
+  }
 `;
 
+type FormErrors = {
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+  password?: String;
+};
+
+export const IDLE_STATUS = "idle";
+export const LOADING_STATUS = "loading";
+export const SUCCESS_STATUS = "success";
+export const ERROR_STATUS = "error";
+
+// enum Statuses {
+//   IDLE_STATUS = "idle",
+//   LOADING_STATUS = "loading",
+//   SUCCESS_STATUS = "success",
+//   ERROR_STATUS = "error",
+// }
+/**
+ * Validates an email
+ * @param email {string} - The email to be validated
+ * @returns boolean - True if it is a valid email, false otherwise
+ *
+ * Attribution to Sayantini: https://www.edureka.co/blog/javascript-email-validation/
+ */
+const validateEmail = (email: String): Boolean => {
+  const mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  return email.match(mailformat) ? true : false;
+};
+
 const SignupPage = () => {
+  const [formData, setFormData] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [formErrors, setFormErrors] = React.useState<FormErrors>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const [status, setStatus] = React.useState<String>(IDLE_STATUS);
+
+  // const onChange = (e: SyntheticEvent): void => {
+  //   const target = e.target as HTMLInputElement;
+  //   setFormData({
+  //     ...formData,
+  //     [target.name]: target.value,
+  //   });
+  // };
+
+  const onChange = (e: SyntheticEvent & { target: HTMLInputElement }): void => {
+    const target = e.target;
+    setFormData({
+      ...formData,
+      [target.name]: target.value,
+    });
+  };
+
+  // TODO: on submitting
   const onSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
+    setStatus(LOADING_STATUS);
     // TODO: make everything work with React
-    console.log("Submit the content after validating");
+    console.log("Submit the content after validating - ", formData);
+
+    const _errors: FormErrors = {};
+    const { firstName, lastName, email, password } = formData;
+    if (!firstName) {
+      _errors.firstName = `First Name cannot be empty`;
+    }
+    if (!lastName) {
+      _errors.lastName = `Last Name cannot be empty`;
+    }
+    if (!email) {
+      _errors.email = `Email cannot be empty`;
+    } else if (!validateEmail(email)) {
+      _errors.email = `Looks like this is not an email`;
+    }
+    if (!password) {
+      _errors.password = `Password cannot be empty`;
+    }
+
+    setFormErrors(_errors);
+    console.log("errors: ", formErrors);
+
+    if (
+      !_errors.firstName &&
+      !_errors.lastName &&
+      !_errors.email &&
+      !_errors.password
+    ) {
+      setStatus(SUCCESS_STATUS);
+      console.log("EIEIE!");
+    } else {
+      setStatus(IDLE_STATUS);
+    }
   };
+
   return (
     <S.Section>
       <S.HomeTitle>
@@ -230,8 +331,13 @@ const SignupPage = () => {
           <span className="highlighted">Try it free 7 days</span> then $20/mo.
           thereafter
         </S.TrialBanner>
-        <S.Form onSubmit={onSubmit}>
-          <div className="form__group">
+        <S.Form onSubmit={onSubmit} noValidate>
+          {status === SUCCESS_STATUS && (
+            <h1 className="successHeading">Thanks for registering!</h1>
+          )}
+          <div
+            className={`form__group ${formErrors?.firstName ? "error" : ""}`}
+          >
             <span className="form__input-required">&#33;</span>
             <input
               className="input"
@@ -239,44 +345,59 @@ const SignupPage = () => {
               placeholder="First Name"
               required
               id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={onChange}
             />
             <label htmlFor="firstName" className="form__label-error">
-              First Name cannot be empty
+              {formErrors?.firstName}
             </label>
           </div>
-          <div className="form__group">
+          <div className={`form__group ${formErrors?.lastName ? "error" : ""}`}>
+            <span className="form__input-required">&#33;</span>
             <input
               className="input"
               type="text"
               placeholder="Last Name"
               required
               id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={onChange}
             />
             <label htmlFor="lastName" className="form__label-error">
-              Last Name cannot be empty
+              {formErrors?.lastName}
             </label>
           </div>
-          <div className="form__group">
+          <div className={`form__group ${formErrors?.email ? "error" : ""}`}>
+            <span className="form__input-required">&#33;</span>
             <input
               className="input"
               type="email"
               placeholder="Email Address"
               required
               id="email"
+              name="email"
+              value={formData.email}
+              onChange={onChange}
             />
             <label htmlFor="email" className="form__label-error">
-              Email cannot be empty
+              {formErrors?.email}
             </label>
           </div>
-          <div className="form__group">
+          <div className={`form__group ${formErrors?.password ? "error" : ""}`}>
+            <span className="form__input-required">&#33;</span>
             <input
               className="input"
               type="password"
               placeholder="Password"
               required
+              name="password"
+              value={formData.password}
+              onChange={onChange}
             />
             <label htmlFor="password" className="form__label-error">
-              Password cannot be empty
+              {formErrors?.password}
             </label>
           </div>
           <button type="submit" className="btn">
