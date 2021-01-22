@@ -6,9 +6,9 @@
 
 TODOS:
 
-- Do the desktop version
 - Do the validation
-- Review mobile version
 
 -- Add some animations
 -- Manage form state with React
+
+- Review mobile version

@@ -115,7 +115,6 @@ S.Form = styled.form`
     font-weight: 600;
     border: 0.1rem solid #dedede;
     border-radius: 0.5rem;
-    margin-bottom: 1.6rem;
 
     &:focus {
       outline: none;
@@ -124,6 +123,39 @@ S.Form = styled.form`
       &:invalid {
         border: 0.25rem solid ${colors.red};
       }
+    }
+
+    &.error {
+      border: 0.25rem solid ${colors.red};
+    }
+  }
+  .form__input-required {
+    position: absolute;
+    background-color: ${colors.red};
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 2rem;
+    right: 1.6rem;
+    border-radius: 50%;
+    display: none;
+  }
+  .form__group {
+    /* TODO: see how to improve this once the errors are there! */
+    margin-bottom: 1.6rem;
+    position: relative;
+  }
+  .form__label-error {
+    color: ${colors.red};
+    display: block;
+    text-align: right;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0.6rem;
+    display: none;
+    &.error {
+      display: block;
     }
   }
   .btn {
@@ -182,30 +214,54 @@ const SignupPage = () => {
           thereafter
         </S.TrialBanner>
         <S.Form onSubmit={onSubmit}>
-          <input
-            className="input"
-            type="text"
-            placeholder="First Name"
-            required
-          />
-          <input
-            className="input"
-            type="text"
-            placeholder="Last Name"
-            required
-          />
-          <input
-            className="input"
-            type="email"
-            placeholder="Email Address"
-            required
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Password"
-            required
-          />
+          <div className="form__group">
+            <span className="form__input-required">&#33;</span>
+            <input
+              className="input"
+              type="text"
+              placeholder="First Name"
+              required
+              id="firstName"
+            />
+            <label htmlFor="firstName" className="form__label-error">
+              First Name cannot be empty
+            </label>
+          </div>
+          <div className="form__group">
+            <input
+              className="input"
+              type="text"
+              placeholder="Last Name"
+              required
+              id="lastName"
+            />
+            <label htmlFor="lastName" className="form__label-error">
+              Last Name cannot be empty
+            </label>
+          </div>
+          <div className="form__group">
+            <input
+              className="input"
+              type="email"
+              placeholder="Email Address"
+              required
+              id="email"
+            />
+            <label htmlFor="email" className="form__label-error">
+              Email cannot be empty
+            </label>
+          </div>
+          <div className="form__group">
+            <input
+              className="input"
+              type="password"
+              placeholder="Password"
+              required
+            />
+            <label htmlFor="password" className="form__label-error">
+              Password cannot be empty
+            </label>
+          </div>
           <button type="submit" className="btn">
             claim your free trial
           </button>
