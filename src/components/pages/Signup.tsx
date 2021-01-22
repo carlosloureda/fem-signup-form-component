@@ -39,7 +39,7 @@ S.Section = styled.section`
     display: block;
   }
 
-  /* TODO: fix this little ñapa! */
+  /* TODO: fix this little ñapa! How to set brackgrounds on section that fill the body ?*/
   @media (max-width: 525px) {
     height: 100%;
   }
