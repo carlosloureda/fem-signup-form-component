@@ -62,6 +62,7 @@ S.HomeTitle = styled.div`
   }
 
   .heading {
+    animation: moveInLeftHeading 0.5s ease-out;
     padding-bottom: 4.5rem;
     font-size: 5rem;
     line-height: 5.5rem;
@@ -75,6 +76,34 @@ S.HomeTitle = styled.div`
       font-size: ${hugeFontSize};
       line-height: 3.6rem;
       padding-bottom: 1.6rem;
+    }
+  }
+  .subheading {
+    animation: moveInLeftSubheading 1s ease-in;
+  }
+
+  @keyframes moveInLeftHeading {
+    0% {
+      opacity: 0;
+      transform: translateX(-20rem);
+    }
+    70% {
+      transform: translateX(5rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+
+  @keyframes moveInLeftSubheading {
+    0% {
+      opacity: 0;
+      transform: translateX(-20rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
     }
   }
 `;
@@ -284,7 +313,7 @@ const SignupPage = () => {
     <S.Section>
       <S.HomeTitle>
         <h2 className="heading">Learn to code by watching others</h2>
-        <p>
+        <p className="subheading">
           See how experienced developers solve problems in real-time. Watching
           scripted tutorials is great, but understanding how developers think is
           invaluable.
