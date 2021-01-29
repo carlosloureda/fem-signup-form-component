@@ -39,12 +39,12 @@ S.Section = styled.section`
   @media (max-width: ${breakpoints.mobileBig}) {
     display: block;
   }
+  padding: 0 2.4rem;
 
   /* TODO: fix this little ñapa! How to set brackgrounds on section that fill the body ?*/
   @media (max-width: 525px) {
     height: 100%;
 
-    padding: 0 2.4rem;
     padding-bottom: 7.2rem;
   }
 
@@ -60,6 +60,7 @@ S.HomeTitle = styled.div`
   @media (min-width: ${breakpoints.mobileBig}) {
     max-width: 52.5rem;
     text-align: initial;
+    flex: 1;
   }
 
   .heading {
@@ -387,8 +388,6 @@ const SignupPage = () => {
           </div>
           <div className={`form__group ${formErrors?.password ? "error" : ""}`}>
             <span className="form__input-required">&#33;</span>
-            Valid names are: label element, title undefined, aria-label
-            undefined, aria-labelledby undefined.
             <input
               className="input"
               aria-label="password"
