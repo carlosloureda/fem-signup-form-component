@@ -3,6 +3,7 @@ import React, { SyntheticEvent } from "react";
 import styled from "@emotion/styled";
 import { colors, breakpoints, hugeFontSize } from "../../theme/variables";
 import bgDesktop from "../../images/bg-intro-desktop.png";
+import Button from "../atoms/Button";
 import bgMobile from "../../images/bg-intro-mobile.png";
 
 import { Link } from "react-router-dom";
@@ -174,24 +175,6 @@ S.Form = styled.form`
     /* &.error {
       display: block;
     } */
-  }
-  .btn {
-    text-transform: uppercase;
-    padding: 1.5rem 3rem;
-    display: block;
-    border-radius: 0.5rem;
-    background-color: ${colors.green};
-    width: 100%;
-    font-size: 1.5rem;
-    font-weight: 600;
-
-    letter-spacing: 1px;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-
-    box-shadow: inset 0 -0.4rem 0 rgba(0, 0, 0, 0.15);
-    margin-bottom: 1.1rem;
   }
 
   .terms {
@@ -383,9 +366,8 @@ const SignupPage = () => {
               {formErrors?.password}
             </label>
           </div>
-          <button type="submit" className="btn">
-            claim your free trial
-          </button>
+          <Button type={"submit"}>claim your free trial</Button>
+
           {/* TODO: for RPG compliance you need to checkbox this! */}
           <p className="terms">
             By clicking the button, you are agreeing to our{" "}
