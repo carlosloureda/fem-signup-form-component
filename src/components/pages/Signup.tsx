@@ -43,10 +43,11 @@ S.Section = styled.section`
   /* TODO: fix this little ñapa! How to set brackgrounds on section that fill the body ?*/
   @media (max-width: 525px) {
     height: 100%;
+
+    padding: 0 2.4rem;
+    padding-bottom: 7.2rem;
   }
 
-  padding: 0 2.4rem;
-  padding-bottom: 7.2rem;
   color: #fff;
   /* margin: 0 auto; */
 `;
