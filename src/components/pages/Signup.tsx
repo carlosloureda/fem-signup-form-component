@@ -378,7 +378,7 @@ const SignupPage = () => {
               name="email"
               value={formData.email}
               onChange={onChange}
-              autoComplete="userName"
+              autoComplete="email"
             />
             <label htmlFor="email" className="form__label-error">
               {formErrors?.email}
@@ -395,6 +395,7 @@ const SignupPage = () => {
               placeholder="Password"
               required
               name="password"
+              id="password"
               value={formData.password}
               onChange={onChange}
               autoComplete="current-password"
