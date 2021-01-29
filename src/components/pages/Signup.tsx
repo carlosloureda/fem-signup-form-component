@@ -111,6 +111,7 @@ S.HomeTitle = styled.div`
 S.FormContainer = styled.div`
   @media (min-width: ${breakpoints.mobileBig}) {
     max-width: 54rem;
+    flex: 1;
   }
 `;
 
