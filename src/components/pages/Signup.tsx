@@ -386,8 +386,11 @@ const SignupPage = () => {
           </div>
           <div className={`form__group ${formErrors?.password ? "error" : ""}`}>
             <span className="form__input-required">&#33;</span>
+            Valid names are: label element, title undefined, aria-label
+            undefined, aria-labelledby undefined.
             <input
               className="input"
+              aria-label="password"
               type="password"
               placeholder="Password"
               required
