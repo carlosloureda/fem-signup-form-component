@@ -276,6 +276,7 @@ const SignupPage = () => {
 
   const onSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
+    console.log("Sending");
     setStatus(LOADING_STATUS);
 
     const _errors: FormErrors = {};
@@ -303,7 +304,10 @@ const SignupPage = () => {
       !_errors.email &&
       !_errors.password
     ) {
-      setStatus(SUCCESS_STATUS);
+      setTimeout(() => {
+        console.log("Faking http request");
+        setStatus(SUCCESS_STATUS);
+      }, 2000);
     } else {
       setStatus(IDLE_STATUS);
     }
@@ -395,7 +399,9 @@ const SignupPage = () => {
               {formErrors?.password}
             </label>
           </div>
-          <Button type={"submit"}>claim your free trial</Button>
+          <Button type={"submit"} disabled={status === LOADING_STATUS}>
+            claim your free trial
+          </Button>
 
           {/* TODO: for RPG compliance you need to checkbox this! */}
           <p className="terms">

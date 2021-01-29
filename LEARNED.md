@@ -7,7 +7,6 @@
 TODOS:
 
 -- Form width on desktop is screwed!!!
--- Add some animations
 -- clicked button state, animations and staff
 
 - Better validation and useEffect adn so
